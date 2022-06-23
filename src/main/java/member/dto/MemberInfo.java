@@ -3,6 +3,7 @@ package member.dto;
 import java.time.LocalDateTime;
 
 public class MemberInfo {
+	private int memberIdx;
 	private String id;
 	private String pw;
 	private String pwChk;
@@ -23,7 +24,25 @@ public class MemberInfo {
 		this.joinDate = joinDate;
 	}
 	
-	
+	public MemberInfo(int memberIdx, String id, String pw, String name, String tel, String addr, String email, LocalDateTime joinDate) {
+		this.memberIdx = memberIdx;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.tel = tel;
+		this.addr = addr;
+		this.email = email;
+		this.joinDate = joinDate;
+	}
+
+	public int getMemberIdx() {
+		return memberIdx;
+	}
+
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
+	}
+
 	public String getId() {
 		return id;
 	}
