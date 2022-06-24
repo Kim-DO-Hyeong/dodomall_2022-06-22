@@ -169,5 +169,65 @@ public class MemberInfoDao {
 		return memberInfo;
 	}
 	
+	public boolean update(MemberInfo memberInfo){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			// DB 접속
+			conn = DatabaseManager.getConnection();
+			
+			// 쿼리 준비
+			String sql ="UPDATE member_info SET pw= ?, name= ?, tel = ?, addr = ?, email = ? WHERE memberIdx = ?" ;
+			
+			pstmt = DatabaseManager.getPstmt(conn, sql);
+			pstmt.setString(1, memberInfo.getPw());
+			pstmt.setString(2, memberInfo.getName());
+			pstmt.setString(3, memberInfo.getTel());
+			pstmt.setString(4, memberInfo.getAddr());
+			pstmt.setString(5, memberInfo.getEmail());
+			pstmt.setInt(6, memberInfo.getMemberIdx());
+			// 쿼리 실행 
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
+		}
+		
+		return false;
+	}
+
+	public boolean delete(int memberIdx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			// DB 접속
+			conn = DatabaseManager.getConnection();
+			
+			// 쿼리 준비
+			String sql ="DELETE FROM member_info WHERE memberIdx =?";
+			
+			pstmt = DatabaseManager.getPstmt(conn, sql);
+			pstmt.setInt(1, memberIdx);
+			
+			// 쿼리 실행 
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
+		}
+		return false;
+	}
 	
 }

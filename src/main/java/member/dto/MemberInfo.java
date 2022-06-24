@@ -13,6 +13,12 @@ public class MemberInfo {
 	private String email;
 	private LocalDateTime joinDate;
 	
+	
+	
+	public MemberInfo() {
+		
+	}
+
 	public MemberInfo(String id, String pw, String pwChk, String name, String tel, String addr, String email, LocalDateTime joinDate) {
 		this.id = id;
 		this.pw = pw;

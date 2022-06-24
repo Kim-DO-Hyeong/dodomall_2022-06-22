@@ -1,8 +1,6 @@
 package util;
 
-import javax.servlet.http.HttpServletResponse;
-
-public class Validator {
+public class MemberInfoValidator {
 	// 아이디가 올바른지 검증하는 메서드
 	public boolean idValidator(String id) {
 		boolean result = false;
@@ -35,6 +33,7 @@ public class Validator {
 				break;
 			}
 		}
+		
 		for(int i=0 ; i < upperCase.length;i++) {
 			char nth = upperCase[i];
 			
@@ -124,6 +123,7 @@ public class Validator {
 	}
 	
 	// 이름이 올바른지 검증하는 메서드
+	// 규칙 : 3자만 가능, 한글만 가능 
 	public boolean nameValidator(String name) {
 		boolean result = false;
 		
@@ -141,16 +141,32 @@ public class Validator {
 				result = true;
 			}
 		}
-		return false;
+		return result;
 	}
 	
+	
 	// 전화번호가 올바른지 검증하는 메서드
+	// 규칙: 010-1111-2222 와 같은 형식만 가능
+	//     각 자리마다 하이픈이 반드시 있어야하고 
+	//     첫 자리는 3자, 중간 자리는 4자, 마지막 자리는 4자여야함 
 	public boolean telValidator(String tel) {
+		// 문자열의 split() 매서드를 활용
+		
+		
+		boolean result = false;
+		
+		if(tel == null) { 
+			result = true;
+		}else if(tel.trim().length()==0) {
+			result = true;
+		}else if(tel.length() != 13) {
+			result = true;
+		}
+		
 		String frontTel = tel.substring(0, 3);
 		String middleTel = tel.substring(4,8);
 		String backTel = tel.substring(9,13);
 		
-		boolean result = false;
 		
 		if(frontTel.length() != 3) {
 			result = true;
@@ -167,13 +183,42 @@ public class Validator {
 	}
 	
 	// 주소가 올바른지 검증하는 메서드
+	// 규칙 : 특별시 , 광역시, 시, 도만 가능
+	// 서울 특별시
+	// 인천 광역시
+	// 제주특별자치도
+	// ... 
 	public boolean addrValidator(String addr) {
-		return false;
+		boolean result= false;
+		
+		String[] list = {"특별시", "광역시","시","도"};
+		
+		for(String nth:list) {
+			if(addr.equals(nth)) {
+			}
+		}
+		
+		if(addr == null) { 
+			result = true;
+		}else if(addr.trim().length()==0) {
+			result = true;
+		}else if(addr.length() > 20) {
+			result = true;
+		}
+		return result;
 	}
 	
 	// 아이디가 올바른지 검증하는 메서드
 	public boolean emailValidator(String email) {
 		boolean result = false;
+		
+		if(email == null) { 
+			result = true;
+		}else if(email.trim().length()==0) {
+			result = true;
+		}else if(email.length() > 50) {
+			result = true;
+		}
 		
 		int isEmail = email.indexOf("@");
 		
@@ -183,4 +228,5 @@ public class Validator {
 		
 		return result;
 	}
+
 }

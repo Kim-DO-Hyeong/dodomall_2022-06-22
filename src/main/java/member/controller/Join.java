@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import exception.BadParameterException;
 import member.dto.MemberInfo;
 import member.service.MemberService;
-import util.Validator;
+import util.MemberInfoValidator;
 
 @WebServlet("/member/join")
 public class Join extends HttpServlet {
@@ -37,7 +37,7 @@ public class Join extends HttpServlet {
 			String addr = request.getParameter("addr");
 			String email = request.getParameter("email");
 			
-			Validator validator = new Validator();
+			MemberInfoValidator validator = new MemberInfoValidator();
 			
 			if(validator.idValidator(id)) 							throw new BadParameterException();
 			else if(validator.pwValidator(pw) || !pw.equals(pwChk)) throw new BadParameterException();
@@ -73,7 +73,7 @@ public class Join extends HttpServlet {
 			}
 			
 		}catch(BadParameterException e) {
-			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
 		
