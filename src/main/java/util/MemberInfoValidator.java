@@ -23,13 +23,17 @@ public class MemberInfoValidator {
 		
 		boolean existUpperCase = false;
 		
+		// 영어 대소문자 중 하나만 존재 하면 되는 상황을 위해 저장하는 변수
+		boolean existEng = false;
+		
 		boolean existNumber = false;
 		
 		for(int i=0 ; i < lowerCase.length;i++) {
 			char nth = lowerCase[i];
 			
 			if(id.indexOf(nth) != -1) {
-				existLowerCase = true;
+//				existLowerCase = true;
+				existEng = true;
 				break;
 			}
 		}
@@ -38,7 +42,8 @@ public class MemberInfoValidator {
 			char nth = upperCase[i];
 			
 			if(id.indexOf(nth) != -1) {
-				existUpperCase = true;
+//				existUpperCase = true
+				existEng = true;
 				break;
 			}
 		}
@@ -52,10 +57,10 @@ public class MemberInfoValidator {
 			}
 		}
 		
-		if(!existLowerCase) {
+		if(!existEng) {
 			result = true;
-		}else if(!existUpperCase) {
-			result = true;
+//		}else if(!existUpperCase) {
+//			result = true;
 		}else if(!existNumber) {
 			result = true;
 		}
@@ -84,13 +89,17 @@ public class MemberInfoValidator {
 		
 		boolean existUpperCase = false;
 		
+		// 영어 대소문자 중 하나만 존재 하면 되는 상황을 위해 저장하는 변수
+		boolean existEng = false;
+		
 		boolean existNumber = false;
 		
 		for(int i=0 ; i < lowerCase.length;i++) {
 			char nth = lowerCase[i];
 			
 			if(pw.indexOf(nth) != -1) {
-				existLowerCase = true;
+//				existLowerCase = true;
+				existEng = true;
 				break;
 			}
 		}
@@ -98,7 +107,8 @@ public class MemberInfoValidator {
 			char nth = upperCase[i];
 			
 			if(pw.indexOf(nth) != -1) {
-				existUpperCase = true;
+//				existLowerCase = true;
+				existEng = true;
 				break;
 			}
 		}
@@ -112,10 +122,10 @@ public class MemberInfoValidator {
 			}
 		}
 		
-		if(!existLowerCase) {
+		if(!existEng) {
 			result = true;
-		}else if(!existUpperCase) {
-			result = true;
+//		}else if(!existUpperCase) {
+//			result = true;
 		}else if(!existNumber) {
 			result = true;
 		}
