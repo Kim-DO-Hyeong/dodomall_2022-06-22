@@ -34,12 +34,10 @@ public class ProductInfoDao {
 				nth.setCategory(rs.getString("category"));
 				nth.setStock(rs.getInt("stock"));
 				nth.setPrice(rs.getInt("price"));
-				nth.setInsertDate(rs.getTimestamp("insertTime").toLocalDateTime());
+				nth.setInsertDate(rs.getTimestamp("insertDate").toLocalDateTime());
 				
 				productInfoList.add(nth);
 			}
-			
-			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -50,5 +48,72 @@ public class ProductInfoDao {
 		}
 		
 		return productInfoList;
+	}
+	
+	public int getAmount() {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		int amount = 0;
+		try {
+			conn = DatabaseManager.getConnection();
+			String sql = "SELECT COUNT(*) AS amount FROM product_info"; 
+			
+			pstmt = DatabaseManager.getPstmt(conn, sql);
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			amount= rs.getInt("amount");
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DatabaseManager.closeResultSet(rs);
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
+		}
+		
+		return amount;
+	}
+	
+	public ProductInfo getProductInfoByProductIdx(int productIdx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		ProductInfo productInfo = null;
+		
+		try {
+			conn = DatabaseManager.getConnection();
+			String sql = "SELECT *FROM product_info WHERE productIdx = ?"; 
+			
+			pstmt = DatabaseManager.getPstmt(conn, sql);
+			pstmt.setInt(1, productIdx);
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			productInfo = new ProductInfo();
+			productInfo.setProductIdx(productIdx);
+			productInfo.setName(rs.getString("name"));
+			productInfo.setCategory(rs.getString("category"));
+			productInfo.setStock(rs.getInt("stock"));
+			productInfo.setPrice(rs.getInt("price"));
+			productInfo.setImg(rs.getString("img"));
+			productInfo.setInsertDate(rs.getTimestamp("insertDate").toLocalDateTime());
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DatabaseManager.closeResultSet(rs);
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
+		}
+		
+		return productInfo;
+		
 	}
 }
