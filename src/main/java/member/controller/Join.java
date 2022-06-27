@@ -73,6 +73,7 @@ public class Join extends HttpServlet {
 			}
 			
 		}catch(BadParameterException e) {
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
