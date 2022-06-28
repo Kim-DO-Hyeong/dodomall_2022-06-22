@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import buy.dto.BuyInfo;
 import product.dto.ProductInfo;
 import util.DatabaseManager;
 
@@ -80,7 +81,7 @@ public class ProductInfoDao {
 		return amount;
 	}
 	
-	public ProductInfo getProductInfoByProductIdx(int productIdx) {
+	public ProductInfo selectByProductIdx(int productIdx) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
@@ -115,5 +116,27 @@ public class ProductInfoDao {
 		
 		return productInfo;
 		
+	}
+	
+	public boolean decreaseStock(int productIdx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DatabaseManager.getConnection();
+			String sql = "UPDATE product_info SET stock = stock -1 WHERE productIdx =?"; 
+			
+			pstmt = DatabaseManager.getPstmt(conn, sql);
+			pstmt.setInt(1, productIdx);
+			
+			pstmt.executeUpdate();
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
+		}
+		return false;	
 	}
 }

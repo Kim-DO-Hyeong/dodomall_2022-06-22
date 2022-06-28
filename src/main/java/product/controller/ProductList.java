@@ -11,28 +11,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import exception.BadParameterException;
 import product.service.ProductService;
+import util.ProductInfoValidator;
 
 @WebServlet("/product/list")
 public class ProductList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		
-		// 페이지에 번호에 맞는 상품 목록을 불러온다 
-		ProductService service = new ProductService();
-		JSONObject json = service.getProductInfoList(pageNumber);
-		
-		if(json != null) {
-			// 불러온 상품 목록을 클라이언트에게 전달한다 
-			response.setContentType("application/json;charset=UTF-8");
+		try {
+			ProductInfoValidator validator = new ProductInfoValidator();
+			if(validator.pageNumberValidator(request.getParameter("pageNumber"))) throw new BadParameterException();
 			
+			int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+			
+			// 페이지에 번호에 맞는 상품 목록을 불러온다 
+			ProductService service = new ProductService();
+			JSONObject productInfoList = service.getProductInfoList(pageNumber);
+			
+			if(productInfoList == null) throw new BadParameterException();
+			
+			// 불러온 상품 목록이 null 아니라면 클라이언트에게 전달한다 
+			response.setContentType("application/json;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.print(json);
+			out.print(productInfoList);
 			out.close();	
-		}else {
+			
+		}catch(BadParameterException e) {
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 		}
+		
+		
 	}
 }

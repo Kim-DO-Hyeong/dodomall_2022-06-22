@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+#rightHandLogo::before {
+	transform: rotate(90deg);
+}
+#leftHandLogo::before {
+	transform: rotate(270deg);
+}

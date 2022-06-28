@@ -1,5 +1,7 @@
 package util;
 
+import javax.servlet.http.HttpServletResponse;
+
 public class ProductInfoValidator {
 	
 	public boolean nameValidator(String name) {
@@ -51,4 +53,16 @@ public class ProductInfoValidator {
 		
 		return false;
 	}
+
+	public boolean pageNumberValidator(String pageNumber) {
+		
+		if(pageNumber == null) {
+			return true;
+		}else if(Integer.parseInt(pageNumber) < 0 ) {
+			return true;
+		}
+		return false;
+	}
+
+
 }

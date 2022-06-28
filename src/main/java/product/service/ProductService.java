@@ -1,12 +1,18 @@
 package product.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import buy.dto.BuyInfo;
 import product.dao.ProductInfoDao;
 import product.dto.ProductInfo;
+import util.DatabaseManager;
 
 public class ProductService {
 	
@@ -51,7 +57,7 @@ public class ProductService {
 		
 		ProductInfoDao dao = new ProductInfoDao();
 		
-		ProductInfo productInfo = dao.getProductInfoByProductIdx(productIdx);
+		ProductInfo productInfo = dao.selectByProductIdx(productIdx);
 		
 		if(productInfo != null) {
 			JSONObject json = new JSONObject();
@@ -62,13 +68,14 @@ public class ProductService {
 			json.put("stock",productInfo.getStock());
 			json.put("price",productInfo.getPrice());
 			json.put("img",productInfo.getImg());
+			json.put("insertDate",productInfo.getInsertDate());
 			
 			return json;
 		}else {
 			return null;
 		}
 		
-		
-		
 	}
+	
+	
 }

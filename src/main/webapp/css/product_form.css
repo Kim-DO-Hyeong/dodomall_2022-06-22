@@ -1,0 +1,32 @@
+#product_name_wrapper, #product_content_wrapper, #product_category_wrapper, #product_price_wrapper,#product_file_wrapper  {
+    margin-bottom: 30px;
+}
+
+#product_content_wrapper > textarea {
+    resize: none;
+    height: 400px;
+}
+
+.input-group-text {
+    width: 200px;
+    font-size: 32px !important;
+    font-weight: 700;
+    justify-content: end;
+}
+
+.form-control, .form-select, .product_file_path {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+}
+
+input[type=file].form-control {
+    padding: 0;
+    padding-left: 12px;
+    font-size: 2.3rem;
+}
+.product_file_path {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
