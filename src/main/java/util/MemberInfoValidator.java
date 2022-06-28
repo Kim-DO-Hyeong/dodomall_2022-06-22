@@ -205,6 +205,7 @@ public class MemberInfoValidator {
 		
 		for(String nth:list) {
 			if(addr.equals(nth)) {
+				
 			}
 		}
 		
@@ -218,7 +219,7 @@ public class MemberInfoValidator {
 		return result;
 	}
 	
-	// 아이디가 올바른지 검증하는 메서드
+	// 이메일이 올바른지 검증하는 메서드
 	public boolean emailValidator(String email) {
 		boolean result = false;
 		
