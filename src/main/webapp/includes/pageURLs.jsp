@@ -13,7 +13,8 @@
 <c:set var="joinPage" value="http://localhost/dodomall/join/join.jsp"/>
 <c:set var="loginPage" value="http://localhost/dodomall/login/login.jsp"/>
 
-<c:set var="logoutPage" value="http://localhost/dodomall/member/logout"/>
+
+<c:set var="memberUpdatePage" value="http://localhost/dodomall/member/form.jsp"/>
 
 
 

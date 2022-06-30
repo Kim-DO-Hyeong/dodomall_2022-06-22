@@ -1,4 +1,4 @@
-#product_name_wrapper, #product_content_wrapper, #product_category_wrapper, #product_price_wrapper,#product_file_wrapper  {
+#product_name_wrapper, #product_content_wrapper, #product_category_wrapper,#product_stock_wrapper ,#product_price_wrapper,#product_file_wrapper  {
     margin-bottom: 30px;
 }
 

@@ -41,6 +41,11 @@
                               <option value="tablet">테블릿</option>
                             </select>
                         </div>
+                        
+                        <div class="input-group" id="product_stock_wrapper">
+                            <span class="input-group-text">재고</span>
+                            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
 
                         <div class="input-group" id="product_price_wrapper">
                             <span class="input-group-text">가격</span>
@@ -55,7 +60,7 @@
                     </form>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">상품 등록</button>
+                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" id="add_btn">상품 등록</button>
                     </div>
                   </div>
                 </div>
@@ -67,5 +72,24 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
+        
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script>
+        	
+        $("#add_btn").on("clcik",function(){
+        	let name = $("#product_name_wrapper").val();
+        	let category = $("#product_category_wrapper").val();
+        	let stock = $("#product_stock_wrapper").val();
+        	let price = $("#product_price_wrapper").val();
+        	let img = $("#inputGroupFile01").val();
+        	
+        	$.ajax({
+        		url:"/dodomall/mng/product/add",
+        		type:"POST",
+        		data:
+        	});
+        });
+        	
+        </script>
     </body>
 </html>

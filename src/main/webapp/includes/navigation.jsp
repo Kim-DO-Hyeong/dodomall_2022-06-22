@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="pageURLs.jsp" %>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
-
+<%@ include file="apiURLs.jsp" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
@@ -40,8 +40,8 @@
 	                                  	<li><a class="dropdown-item" href="${joinPage }">회원가입</a></li>
 	                                  </c:when>
                                   	  <c:otherwise>
-		                                  <li><a class="dropdown-item" href="#">정보 수정</a></li>
-		                                  <li><a class="dropdown-item" href="${logoutPage }">로그아웃</a></li>
+		                                  <li><a class="dropdown-item" href="${memberUpdatePage }">정보 수정</a></li>
+		                                  <li><a class="dropdown-item" href="${logoutAPI }">로그아웃</a></li>
                                   	  </c:otherwise>
                                   </c:choose>
                                 </ul>

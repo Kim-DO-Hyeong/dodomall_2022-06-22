@@ -46,6 +46,46 @@ public class MemberInfoDao {
 			DatabaseManager.closeConn(conn);
 		}
 	}
+	public MemberInfo selectByMemberIdx(int memberIdx){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		MemberInfo memberInfo = null;
+		
+		try {
+			// DB 접속
+			conn = DatabaseManager.getConnection();
+			
+			// 쿼리 준비
+			String sql ="SELECT * FROM member_info WHERE memberIdx = ?";
+			
+			pstmt = DatabaseManager.getPstmt(conn, sql);
+			pstmt.setInt(1,memberIdx);
+			// 쿼리 실행 
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
+				String name = rs.getString("name");
+				String tel = rs.getString("tel");
+				String addr = rs.getString("addr");
+				String email = rs.getString("email");
+				LocalDateTime joinDate = rs.getTimestamp("joinDate").toLocalDateTime();
+				
+				memberInfo = new MemberInfo(memberIdx ,id, pw, name, tel, addr, email, joinDate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DatabaseManager.closeResultSet(rs);
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
+		}
+		
+		return memberInfo;
+	}
 	
 	public MemberInfo selectById(String id){
 		Connection conn = null;
@@ -229,5 +269,6 @@ public class MemberInfoDao {
 		}
 		return false;
 	}
+	
 	
 }

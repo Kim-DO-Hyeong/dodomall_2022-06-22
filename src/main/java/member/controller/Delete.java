@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import member.dto.MemberInfo;
 import member.service.MemberService;
+import util.URLs;
 
 @WebServlet("/member/delete")
 public class Delete extends HttpServlet {
