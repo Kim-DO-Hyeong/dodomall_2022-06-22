@@ -17,11 +17,11 @@ import util.DatabaseManager;
 public class ProductService {
 	
 	public JSONObject getProductInfoList(int pageNumber) { 
-		pageNumber = (pageNumber-1)*8;
+		int start = (pageNumber-1)*8;
 		
 		ProductInfoDao dao = new ProductInfoDao();
 		
-		List<ProductInfo> productInfoList = dao.getProductInfoList(pageNumber);
+		List<ProductInfo> productInfoList = dao.getProductInfoList(start);
 		
 		JSONArray list = new JSONArray();
 		

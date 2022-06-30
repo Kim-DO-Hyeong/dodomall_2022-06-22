@@ -18,7 +18,7 @@ public class Logout extends HttpServlet {
 		session.invalidate();
 //		session.removeAttribute("loginMemberInfo");
 		
-//		response.sendRedirect(URLs.MAIN_PAGE);
+		response.sendRedirect(URLs.MAIN_PAGE);
 	}
 
 }

@@ -1,5 +1,7 @@
 package util;
 
+import java.util.regex.Pattern;
+
 public class MemberInfoValidator {
 	// 아이디가 올바른지 검증하는 메서드
 	public boolean idValidator(String id) {
@@ -23,17 +25,13 @@ public class MemberInfoValidator {
 		
 		boolean existUpperCase = false;
 		
-		// 영어 대소문자 중 하나만 존재 하면 되는 상황을 위해 저장하는 변수
-		boolean existEng = false;
-		
 		boolean existNumber = false;
 		
 		for(int i=0 ; i < lowerCase.length;i++) {
 			char nth = lowerCase[i];
 			
 			if(id.indexOf(nth) != -1) {
-//				existLowerCase = true;
-				existEng = true;
+				existLowerCase = true;
 				break;
 			}
 		}
@@ -42,8 +40,7 @@ public class MemberInfoValidator {
 			char nth = upperCase[i];
 			
 			if(id.indexOf(nth) != -1) {
-//				existUpperCase = true
-				existEng = true;
+				existUpperCase = true;
 				break;
 			}
 		}
@@ -57,10 +54,10 @@ public class MemberInfoValidator {
 			}
 		}
 		
-		if(!existEng) {
+		if(!existLowerCase) {
 			result = true;
-//		}else if(!existUpperCase) {
-//			result = true;
+		}else if(!existUpperCase) {
+			result = true;
 		}else if(!existNumber) {
 			result = true;
 		}
@@ -85,12 +82,9 @@ public class MemberInfoValidator {
 		
 		char[] numberCase = {'0','1','2','3','4','5','6','7','8','9'};
 		
-		boolean existLowerCase = false;
+boolean existLowerCase = false;
 		
 		boolean existUpperCase = false;
-		
-		// 영어 대소문자 중 하나만 존재 하면 되는 상황을 위해 저장하는 변수
-		boolean existEng = false;
 		
 		boolean existNumber = false;
 		
@@ -98,17 +92,16 @@ public class MemberInfoValidator {
 			char nth = lowerCase[i];
 			
 			if(pw.indexOf(nth) != -1) {
-//				existLowerCase = true;
-				existEng = true;
+				existLowerCase = true;
 				break;
 			}
 		}
+		
 		for(int i=0 ; i < upperCase.length;i++) {
 			char nth = upperCase[i];
 			
 			if(pw.indexOf(nth) != -1) {
-//				existLowerCase = true;
-				existEng = true;
+				existUpperCase = true;
 				break;
 			}
 		}
@@ -122,10 +115,10 @@ public class MemberInfoValidator {
 			}
 		}
 		
-		if(!existEng) {
+		if(!existLowerCase) {
 			result = true;
-//		}else if(!existUpperCase) {
-//			result = true;
+		}else if(!existUpperCase) {
+			result = true;
 		}else if(!existNumber) {
 			result = true;
 		}
@@ -135,23 +128,24 @@ public class MemberInfoValidator {
 	// 이름이 올바른지 검증하는 메서드
 	// 규칙 : 3자만 가능, 한글만 가능 
 	public boolean nameValidator(String name) {
-		boolean result = false;
-		
-		if(name == null) { 
-			result = true;
-		}else if(name.trim().length()==0) {
-			result = true;
-		}else if(name.length() != 3) {
-			result = true;
-		}
-		
-		// 이름에 한글외에 다른 문자면 
-		for(int i=0;i<name.length();i++){
-			if(Character.getType(name.charAt(i)) != 5) {
-				result = true;
-			}
-		}
-		return result;
+		String pattern = "^[ㄱ-ㅎ가-힣]{3}$";
+        boolean result = Pattern.matches(pattern,name);
+        
+//		if(name == null) { 
+//			result = true;
+//		}else if(name.trim().length()==0) {
+//			result = true;
+//		}else if(name.length() != 3) {
+//			result = true;
+//		}
+//		
+//		// 이름에 한글외에 다른 문자면 
+//		for(int i=0;i<name.length();i++){
+//			if(Character.getType(name.charAt(i)) != 5) {
+//				result = true;
+//			}
+//		}
+		return !result;
 	}
 	
 	
@@ -162,34 +156,35 @@ public class MemberInfoValidator {
 	public boolean telValidator(String tel) {
 		// 문자열의 split() 매서드를 활용
 		
-		
-		boolean result = false;
-		
-		if(tel == null) { 
-			result = true;
-		}else if(tel.trim().length()==0) {
-			result = true;
-		}else if(tel.length() != 13) {
-			result = true;
-		}
-		
-		String frontTel = tel.substring(0, 3);
-		String middleTel = tel.substring(4,8);
-		String backTel = tel.substring(9,13);
-		
-		
-		if(frontTel.length() != 3) {
-			result = true;
-		}else if(middleTel.length() !=4 ) {
-			result = true;
-		}else if(backTel.length() != 4) {
-			result = true;
-		}
-		
-		if( tel.charAt(3) !='-' || tel.charAt(8) !='-') {
-			result = true;
-		}
-		return result;
+		String pattern = "^\\d{3}-\\d{4}-\\d{4}$";
+        boolean result = Pattern.matches(pattern,tel);
+//		boolean result = false;
+//		
+//		if(tel == null) { 
+//			result = true;
+//		}else if(tel.trim().length()==0) {
+//			result = true;
+//		}else if(tel.length() != 13) {
+//			result = true;
+//		}
+//		
+//		String frontTel = tel.substring(0, 3);
+//		String middleTel = tel.substring(4,8);
+//		String backTel = tel.substring(9,13);
+//		
+//		
+//		if(frontTel.length() != 3) {
+//			result = true;
+//		}else if(middleTel.length() !=4 ) {
+//			result = true;
+//		}else if(backTel.length() != 4) {
+//			result = true;
+//		}
+//		
+//		if( tel.charAt(3) !='-' || tel.charAt(8) !='-') {
+//			result = true;
+//		}
+		return !result;
 	}
 	
 	// 주소가 올바른지 검증하는 메서드
@@ -201,11 +196,12 @@ public class MemberInfoValidator {
 	public boolean addrValidator(String addr) {
 		boolean result= false;
 		
-		String[] list = {"특별시", "광역시","시","도"};
+		String[] list = {"서울특별시", "부산광역시","인천광역시","광주광역시","대구광역시","제주특별자치도","경기도","강원도","전라도","경상도"};
+		boolean isList=false;
 		
 		for(String nth:list) {
 			if(addr.equals(nth)) {
-				
+				isList=true;
 			}
 		}
 		
@@ -216,7 +212,8 @@ public class MemberInfoValidator {
 		}else if(addr.length() > 20) {
 			result = true;
 		}
-		return result;
+		
+		return result || !isList;
 	}
 	
 	// 이메일이 올바른지 검증하는 메서드

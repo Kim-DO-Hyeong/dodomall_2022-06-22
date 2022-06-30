@@ -40,6 +40,21 @@
         <input type="text" class="form-control" id="floatingName" placeholder="Name">
         <label for="floatingName">이름</label>
       </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingTel" placeholder="Tel">
+        <label for="floatingName">연락처</label>
+      </div>
+      
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingAddr" placeholder="Addr">
+        <label for="floatingName">주소</label>
+      </div>
+      
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingEmail" placeholder="Email">
+        <label for="floatingName">이메일</label>
+      </div>
+      
       
       <div class="form-floating">
         <ul class="list-group">
@@ -84,10 +99,92 @@
         </ul>
       </div>
 
-      <button class="w-100 btn btn-lg btn-secondary" type="button">회원가입</button>
+      <button class="w-100 btn btn-lg btn-secondary" type="button" id="join_btn">회원가입</button>
     </form>
   </main>
-  
+ <script src="../js/scripts.js"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/validator.js"></script>
+        <script>
+	        $("#term1").on("click",function(){
+	            let check = $(this).prop("checked");
+	            
+	            if(check){
+	            	$("#term2").prop("checked",true);
+		            $("#term3").prop("checked",true);
+	            }else{
+	            	$("#term2").prop("checked",false);
+		            $("#term3").prop("checked",false);	
+	            }
+	        });
+	        
+	        $("#term2, #term3").on("click",function(){
+	            let checked1 =$("#term2").prop("checked");
+	            let checked2 =$("#term3").prop("checked");
+
+	            if(!(checked1 && checked2)){
+	                $("#term1").prop("checked",false);
+	            }else{
+	                $("#term1").prop("checked",true);
+	            }
+	        });
+	        
+	        $("#join_btn").on("click",function(){
+	        	// 모든 이용 약관에 체크 여부 
+	        	let check = $("#term1").prop("checked");
+	        	
+	        	if(!check){
+	        		alert("약관동의를 모두 체크해야합니다");
+	        		return false;
+	        	}
+	        	
+        		let id = $("#floatingInput").val();
+        		let pw = $("#floatingPassword").val();
+        		let pwChk =$("#floatingPasswordCheck").val(); 
+        		let name = $("#floatingName").val();
+				let tel = $("#floatingTel").val();
+				let addr = $("#floatingAddr").val();
+				let email = $("#floatingEmail").val();	
+				
+				if(idValidator(id)){
+					alert("아이디를 확인하세요");
+					return false;
+				}else if(pwValidator(pw)){
+					alert("비밀번호를 확인하세요 ");
+					return false;
+				}else if(pwChk!= pw){
+					alert("비밀번호와 비밀번호 확인이 일치하지 않습니다 ");
+					return false;
+				}else if(nameValidator(name)){
+					alert("이름을 확인하세요");
+					return false;
+				}else if(telValidator(tel)){
+					alert("연락처를 확인하세요 ");
+					return false;
+				}else if(addrValidator(addr)){
+					alert("주소를 확인하세요 ");
+					return false;
+				}else if(emailValidator(email)){
+					alert("이메일을 확인하세요 ");
+					return false;
+				}
+				
+        		$.ajax({
+	        		url:"/dodomall/member/join",
+	        		type:"POST",
+	        		data:"id="+id+"&pw="+pw+"&pwChk="+pwChk+"&name="+name+"&tel="+tel+"&addr="+addr+"&email="+email,
+	        		success:function(){
+	        			// 회원가입 성공
+						location.href="http://localhost/dodomall/";		        			
+	        		},
+        			error:function(){
+        				// 회원가입 실패
+        				alert("이미 사용중인 아이디 또는 연락처 또는 이메일입니다.");
+        			}
+	        	});
+        		
+	        });
+   		</script>
   </body>
 </html>
 

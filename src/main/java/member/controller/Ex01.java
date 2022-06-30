@@ -76,6 +76,29 @@ public class Ex01 {
 		
 		System.out.println(isEmail);
 		
+		boolean result= false;
+		
+		String addr="";
+		
+		String[] list = {"서울특별시", "부산광역시","인천광역시","광주광역시","대구광역시","제주특별자치도","경기도","강원도","전라도","경상도"};
+		boolean isList=false;
+		
+		for(String nth:list) {
+			if(addr.equals(nth)) {
+				isList=true;
+			}
+		}
+		
+		if(addr == null) { 
+			result = true;
+		}else if(addr.trim().length()==0) {
+			result = true;
+		}else if(addr.length() > 20) {
+			result = true;
+		}
+		
+		System.out.println((result || !isList)+" : true 이면 잘못됨");
+		
 	}
 
 }
