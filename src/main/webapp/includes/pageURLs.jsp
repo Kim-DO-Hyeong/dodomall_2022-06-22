@@ -16,7 +16,7 @@
 
 <c:set var="memberUpdatePage" value="http://localhost/dodomall/member/form.jsp"/>
 
-<c:set var="productDetailPage" value="http://localhost/dodomall/shop/product_detail.jsp?page=product_detail"/>
+<c:set var="productDetailPage" value="http://localhost/dodomall/product/detail?page=product_detail"/>
 
 
 

@@ -1,34 +1,39 @@
 package product.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
-import exception.BadParameterException;
+import product.dto.ProductInfo;
 import product.service.ProductService;
-import util.ProductInfoValidator;
 
 @WebServlet("/product/detail")
 public class ProductDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
 			int productIdx = Integer.parseInt(request.getParameter("productIdx"));
 			
 			ProductService service = new ProductService();
+
+			ProductInfo productInfo = service.study_getProductInfoByProductIdx(productIdx);
 			
-			JSONObject productInfo = service.getProductInfoByProductIdx(productIdx);
+			request.setAttribute("productInfo", productInfo);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/shop/product_detail.jsp");
+			rd.forward(request, response);
 			
-			response.setContentType("application/json;charset=UTF-8");
+//			JSONObject productInfo = service.getProductInfoByProductIdx(productIdx);
 			
-			PrintWriter output = response.getWriter();
-			
-			output.print(productInfo);
-			output.close();
+//			response.setContentType("application/json;charset=UTF-8");
+//			
+//			PrintWriter output = response.getWriter();
+//			
+//			output.print(productInfo);
+//			output.close();
 	}
 }

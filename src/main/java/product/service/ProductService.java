@@ -53,5 +53,12 @@ public class ProductService {
 		
 	}
 	
+	public ProductInfo study_getProductInfoByProductIdx(int productIdx) {
+		
+		ProductInfoDao dao = new ProductInfoDao();
+		
+		return dao.selectByProductIdx(productIdx);
+		
+	}
 	
 }
