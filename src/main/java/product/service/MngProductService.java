@@ -20,7 +20,7 @@ public class MngProductService {
 		return dao.update(productInfo);
 	}
 	
-	public boolean deleteImg(int productIdx) {
+	public boolean deleteImg(int productIdx,String realPath) {
 		MngProductDao dao = new MngProductDao();
 		
 		ProductInfo productInfo = dao.selectByProductIdx(productIdx);
@@ -28,7 +28,7 @@ public class MngProductService {
 		String img = productInfo.getImg();
 		// 상품에 등록에 이름 
 		
-		File file = new File("C:\\upload\\"+img);
+		File file = new File(realPath+img);
 		
 		if(file.delete()) {
 			return dao.setImgNull(productIdx);
@@ -47,13 +47,13 @@ public class MngProductService {
 		return dao.updateImg(productIdx,img);	
 	}
 	
-	public boolean deleteProduct(int productIdx) {
+	public boolean deleteProduct(int productIdx,String realPath) {
 		MngProductDao dao = new MngProductDao();
 		
 		ProductInfo productInfo = dao.selectByProductIdx(productIdx);
 		
 		if(productInfo.getImg()!=null) {
-			File file = new File("C:\\upload\\"+productInfo.getImg());
+			File file = new File(realPath+productInfo.getImg());
 			
 			file.delete();
 		}

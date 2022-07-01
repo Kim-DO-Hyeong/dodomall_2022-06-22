@@ -22,10 +22,12 @@ public class MngProductImgDelete extends HttpServlet {
 		
 		// 위 동작을 컨트롤러, 서비스, dao 중 어디서 해야할까요 
 		
+		String realPath = request.getServletContext().getRealPath("/images/product/");
+		
 		
 		MngProductService service = new MngProductService();
 		
-		service.deleteImg(productIdx);
+		service.deleteImg(productIdx,realPath);
 		
 	}
 

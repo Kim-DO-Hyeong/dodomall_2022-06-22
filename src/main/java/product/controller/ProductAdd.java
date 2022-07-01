@@ -16,9 +16,10 @@ import exception.BadParameterException;
 import product.dto.ProductInfo;
 import product.service.MngProductService;
 import util.ProductInfoValidator;
+import util.URLs;
 
 @WebServlet("/mng/product/add")
-public class MngProductAdd extends HttpServlet {
+public class ProductAdd extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -29,7 +30,11 @@ public class MngProductAdd extends HttpServlet {
 			// 5. 파일명 변경 정책 
 
 			// request 에는 정보가 안남아있음 -> req 객체를 사용해야함 
-			MultipartRequest req = new MultipartRequest(request, "C:\\upload", 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
+			// 파일의 위치 : 이 프로젝트 내 images 폴더 안에 product 폴더의 경로
+			// ServletContext : 서버와 프로젝트 사이의 다리 역할 - 프로젝트와 관련된 모든 정보를 가지고 있음 
+			// 톰캣이 가지고 있는 이 프로젝트의 경로 
+			String realPath = request.getServletContext().getRealPath("/images/product"); 
+			MultipartRequest req = new MultipartRequest(request, realPath, 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
 			
 //			request.setCharacterEncoding("UTF-8"); req메서드에서 UTF-8 인코딩 
 			
@@ -74,13 +79,13 @@ public class MngProductAdd extends HttpServlet {
 			
 			service.add(newProductInfo);
 			
-			response.setStatus(HttpServletResponse.SC_CREATED);
+			response.sendRedirect(URLs.ALL_PRODUCT_LIST_PAGE);
 
 		}catch(BadParameterException e) {
-			e.printStackTrace();
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			// 이 예외가 발생하면 클라이언트가 잘못된 파라미터를 전달한 것 
+			// 그래서 다시 [ 상품 등록 ] 페이지로 이동을 해야함 
+			response.sendRedirect(URLs.PRODUCT_ADD_PAGE);
 		}
-				
 	}
 
 }

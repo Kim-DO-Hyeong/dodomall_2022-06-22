@@ -1,17 +1,17 @@
 package product.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
 import exception.BadParameterException;
+import product.dto.ProductInfo;
 import product.service.ProductService;
 import util.ProductInfoValidator;
 
@@ -21,21 +21,33 @@ public class ProductList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			ProductInfoValidator validator = new ProductInfoValidator();
-			if(validator.pageNumberValidator(request.getParameter("pageNumber"))) throw new BadParameterException();
 			
-			int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+			int pageNumber= 1;
+			
+			if(request.getParameter("pageNumber") != null) {
+				if(validator.pageNumberValidator(request.getParameter("pageNumber"))) throw new BadParameterException();
+				
+				pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+			}
 			
 			// 페이지에 번호에 맞는 상품 목록을 불러온다 
 			ProductService service = new ProductService();
-			JSONObject productInfoList = service.getProductInfoList(pageNumber);
 			
-			if(productInfoList == null) throw new BadParameterException();
+			int amount = service.getAmount();
 			
-			// 불러온 상품 목록이 null 아니라면 클라이언트에게 전달한다 
-			response.setContentType("application/json;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print(productInfoList);
-			out.close();	
+			if(amount == 0) {
+				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			}else {
+				List<ProductInfo> productInfoList = service.getProductInfoList(pageNumber);
+				
+				request.setAttribute("productInfoList", productInfoList);
+				request.setAttribute("amount", amount);
+				RequestDispatcher rd = request.getRequestDispatcher("/shop/product_list.jsp");
+				rd.forward(request, response);
+			}
+		
+			
+			
 			
 		}catch(BadParameterException e) {
 			e.printStackTrace();

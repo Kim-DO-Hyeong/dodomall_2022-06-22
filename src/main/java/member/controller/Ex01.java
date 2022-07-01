@@ -98,7 +98,14 @@ public class Ex01 {
 		}
 		
 		System.out.println((result || !isList)+" : true 이면 잘못됨");
+	
 		
+		
+		double amountTemp = 17/8.0;
+    	System.out.println(amountTemp);
+    	int pageNum= (int) Math.ceil(amountTemp);
+		
+		System.out.println(pageNum+"dd");
 	}
 
 }

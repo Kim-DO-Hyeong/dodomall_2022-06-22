@@ -56,9 +56,7 @@ public class ProductInfoValidator {
 
 	public boolean pageNumberValidator(String pageNumber) {
 		
-		if(pageNumber == null) {
-			return true;
-		}else if(Integer.parseInt(pageNumber) < 0 ) {
+		if(Integer.parseInt(pageNumber) < 0 ) {
 			return true;
 		}
 		return false;

@@ -13,7 +13,7 @@ import product.service.MngProductService;
 import util.ProductInfoValidator;
 
 @WebServlet("/mng/product/update")
-public class MngProductUpdate extends HttpServlet {
+public class ProductUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {

@@ -10,14 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import product.service.MngProductService;
 
 @WebServlet("/mng/product/delete")
-public class MngProductDelete extends HttpServlet {
+public class ProductDelete extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int productIdx = Integer.parseInt(request.getParameter("productIdx"));
 		
 		MngProductService service = new MngProductService();
 		
-		service.deleteProduct(productIdx);
+		String realPath = request.getServletContext().getRealPath("/images/product/");
+
+		
+		service.deleteProduct(productIdx,realPath);
 		
 	}
 

@@ -21,7 +21,7 @@ public class ProductInfoDao {
 		
 		try {
 			conn = DatabaseManager.getConnection();
-			String sql = "SELECT * FROM product_info LIMIT ?, 8"; 
+			String sql = "SELECT * FROM product_info ORDER BY insertDate DESC LIMIT ?, 8"; 
 			
 			pstmt = DatabaseManager.getPstmt(conn, sql);
 			pstmt.setInt(1, start);
@@ -35,6 +35,7 @@ public class ProductInfoDao {
 				nth.setCategory(rs.getString("category"));
 				nth.setStock(rs.getInt("stock"));
 				nth.setPrice(rs.getInt("price"));
+				nth.setImg(rs.getString("img"));
 				nth.setInsertDate(rs.getTimestamp("insertDate").toLocalDateTime());
 				
 				productInfoList.add(nth);
