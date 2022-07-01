@@ -131,20 +131,6 @@ public class MemberInfoValidator {
 		String pattern = "^[ㄱ-ㅎ가-힣]{3}$";
         boolean result = Pattern.matches(pattern,name);
         
-//		if(name == null) { 
-//			result = true;
-//		}else if(name.trim().length()==0) {
-//			result = true;
-//		}else if(name.length() != 3) {
-//			result = true;
-//		}
-//		
-//		// 이름에 한글외에 다른 문자면 
-//		for(int i=0;i<name.length();i++){
-//			if(Character.getType(name.charAt(i)) != 5) {
-//				result = true;
-//			}
-//		}
 		return !result;
 	}
 	
@@ -154,37 +140,10 @@ public class MemberInfoValidator {
 	//     각 자리마다 하이픈이 반드시 있어야하고 
 	//     첫 자리는 3자, 중간 자리는 4자, 마지막 자리는 4자여야함 
 	public boolean telValidator(String tel) {
-		// 문자열의 split() 매서드를 활용
-		
 		String pattern = "^\\d{3}-\\d{4}-\\d{4}$";
         boolean result = Pattern.matches(pattern,tel);
-//		boolean result = false;
-//		
-//		if(tel == null) { 
-//			result = true;
-//		}else if(tel.trim().length()==0) {
-//			result = true;
-//		}else if(tel.length() != 13) {
-//			result = true;
-//		}
-//		
-//		String frontTel = tel.substring(0, 3);
-//		String middleTel = tel.substring(4,8);
-//		String backTel = tel.substring(9,13);
-//		
-//		
-//		if(frontTel.length() != 3) {
-//			result = true;
-//		}else if(middleTel.length() !=4 ) {
-//			result = true;
-//		}else if(backTel.length() != 4) {
-//			result = true;
-//		}
-//		
-//		if( tel.charAt(3) !='-' || tel.charAt(8) !='-') {
-//			result = true;
-//		}
-		return !result;
+		
+        return !result;
 	}
 	
 	// 주소가 올바른지 검증하는 메서드

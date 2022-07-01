@@ -27,8 +27,7 @@ public class MngProductAdd extends HttpServlet {
 			// 3. 파일의 최대 크기( Byte 단위 ) 5메가바이트
 			// 4. 요청정보에 들어있는 데이터의 인코딩 지정 
 			// 5. 파일명 변경 정책 
-			
-			
+
 			// request 에는 정보가 안남아있음 -> req 객체를 사용해야함 
 			MultipartRequest req = new MultipartRequest(request, "C:\\upload", 1024*1024*5, "UTF-8", new DefaultFileRenamePolicy());
 			

@@ -86,7 +86,10 @@
         	$.ajax({
         		url:"/dodomall/mng/product/add",
         		type:"POST",
-        		data:
+        		data:"name="+name+"&category="+category+"&stock="+stock+"&price="+price+"&img="+img,
+        		success:function(){},
+        		error:function(){}
+        		
         	});
         });
         	
