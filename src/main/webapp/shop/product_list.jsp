@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ include file="../includes/pageURLs.jsp" %>
 <% 
 	int amount = (int)request.getAttribute("amount");
 	
@@ -77,7 +77,7 @@
 				    
 				   
 				    <c:forEach begin="1" end="${end }" var="pageNumber"> 
-				    	<li class="page-item"><a class="page-link" href="#">${pageNumber }</a></li>
+				    	<li class="page-item"><a class="page-link" href="${allProductListPage}&pageNumber=${pageNumber} ">${pageNumber }</a></li>
 				    </c:forEach>
 				    
 				    <li class="page-item">
