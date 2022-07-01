@@ -46,7 +46,7 @@
 	                            	<c:set var="imgFileName" value="no-image.png"/>
 	                            </c:if>
 	                            
-	                            <img class="card-img-top" src="http://localhost/dodomall/images/product/${productInfo.img }" />
+	                            <img class="card-img-top" src="http://localhost/dodomall/images/product/${imgFileName }" />
 	                            <!-- Product details-->
 	                            <div class="card-body p-4">
 	                                <div class="text-center">
@@ -59,7 +59,7 @@
 	                            <!-- Product actions-->
 	                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 	                                <div class="text-center">
-	                                	<a class="btn btn-outline-dark mt-auto" href="http://localhost/dodomall/shop/product_detail.jsp?page=product_detail&productIdx=${nth.productIdx }">상세 정보</a>
+	                                	<a class="btn btn-outline-dark mt-auto" href="${productDetailPage}&productIdx=${productInfo.productIdx }">상세 정보</a>
 	                                </div>
 	                            </div>
 	                        </div>

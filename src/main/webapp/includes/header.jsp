@@ -20,7 +20,9 @@
   	<c:when test="${param.page eq 'smartPhone'}">
 		<c:set var="header_title" value="스마트폰"/>
 	</c:when>
-  	
+  	<c:when test="${param.page eq 'product_detail'}">
+		<c:set var="header_title" value="상품 정보"/>
+	</c:when>
   	<c:when test="${param.page eq 'noteBook'}">
 		<c:set var="header_title" value="노트북"/>  	
   	</c:when>
