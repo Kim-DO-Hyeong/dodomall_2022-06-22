@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import product.dto.ProductInfo;
 import product.service.ProductService;
 
@@ -20,20 +22,11 @@ public class ProductDetail extends HttpServlet {
 			
 			ProductService service = new ProductService();
 
-			ProductInfo productInfo = service.study_getProductInfoByProductIdx(productIdx);
+			ProductInfo productInfo = service.getProductInfoByProductIdx(productIdx);
 			
 			request.setAttribute("productInfo", productInfo);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/shop/product_detail.jsp");
 			rd.forward(request, response);
-			
-//			JSONObject productInfo = service.getProductInfoByProductIdx(productIdx);
-			
-//			response.setContentType("application/json;charset=UTF-8");
-//			
-//			PrintWriter output = response.getWriter();
-//			
-//			output.print(productInfo);
-//			output.close();
 	}
 }

@@ -38,8 +38,13 @@
 		                    <p class="lead">상품 소개 / Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
 		                    <p class="lead">카테고리 / ${productInfo.category }</p>
 		                    <p class="lead">가격 / ${productInfo.price }원</p>
+		                    
 		                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
 		                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" id="buy_btn">구매 하기</button>
+							  <c:if test="${loginMemberInfo.id eq 'Admin1'}">
+							  	<button type="button" class="btn btn-warning btn-lg px-4 me-md-2" id="product_update_btn">정보 수정</button>
+							  	<button type="button" class="btn btn-danger btn-lg px-4 me-md-2" id="product_delete_btn">상품 삭제</button>
+							  </c:if>		                      
 		                    </div>
 		                    <input type="text" id="productIdx" value="${productInfo.productIdx }" style="display:none"/>
 		                  </div>
@@ -55,6 +60,29 @@
         <script src="../js/jquery-3.6.0.min.js"></script>
         
         <script>
+	        $("#product_delete_btn").on("click",function(){
+	    		let productIdx = $("#productIdx").val();
+	    		
+	    		$.ajax({
+	    			url:"/dodomall/mng/product/delete",
+	    			type:"POST",
+	    			data:"productIdx="+productIdx,
+	    			success:function(){
+	    				alert("상품 삭제를 완료했습니다");
+	    				location.href="http://localhost/dodomall/product/list?page=all_product";
+	    			},
+	    			error:function(){
+	    				alert("상품 삭제를 실패했습니다");
+	    			}
+	    		});
+	    		
+	    		
+	    	});
+	        $("#product_update_btn").on("click",function(){
+	    		// 상품 정보 수정 페이지로 이동 
+	        	let productIdx = $("#productIdx").val();
+	    		location.href="/dodomall/view/product/update?productIdx="+productIdx;
+	    	});
         	$("#buy_btn").on("click",function(){
         		let productIdx = $("#productIdx").val();
         		location.href="/dodomall/buy/form.jsp?productIdx="+productIdx;

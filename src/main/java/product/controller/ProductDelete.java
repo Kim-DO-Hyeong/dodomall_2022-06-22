@@ -18,7 +18,6 @@ public class ProductDelete extends HttpServlet {
 		MngProductService service = new MngProductService();
 		
 		String realPath = request.getServletContext().getRealPath("/images/product/");
-
 		
 		service.deleteProduct(productIdx,realPath);
 		

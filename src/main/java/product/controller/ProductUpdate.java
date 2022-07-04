@@ -11,6 +11,7 @@ import exception.BadParameterException;
 import product.dto.ProductInfo;
 import product.service.MngProductService;
 import util.ProductInfoValidator;
+import util.URLs;
 
 @WebServlet("/mng/product/update")
 public class ProductUpdate extends HttpServlet {
@@ -45,6 +46,7 @@ public class ProductUpdate extends HttpServlet {
 			
 			service.update(updateProductInfo);
 			
+			response.sendRedirect(URLs.PRODUCT_DETAIL_PAGE+"&productIdx="+productIdx);
 		}catch(BadParameterException e) {
 			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

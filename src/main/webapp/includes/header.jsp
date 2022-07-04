@@ -21,7 +21,7 @@
 		<c:set var="header_title" value="스마트폰"/>
 	</c:when>
   	<c:when test="${param.page eq 'product_detail'}">
-		<c:set var="header_title" value="상품 정보"/>
+		<c:set var="header_title" value="상세 정보"/>
 	</c:when>
   	<c:when test="${param.page eq 'noteBook'}">
 		<c:set var="header_title" value="노트북"/>  	
@@ -38,6 +38,11 @@
   	<c:when test="${param.page eq 'manager_product_form'}">
   	 	<c:set var="header_title" value="상품 등록 / 수정"/>
   	</c:when>
+  	
+  	<c:when test="${param.page eq 'product_update'}">
+  	 	<c:set var="header_title" value="상품 정보 수정"/>
+  	</c:when>
+  	
 </c:choose>
 
 <header class="bg-dark py-5">

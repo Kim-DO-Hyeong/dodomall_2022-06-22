@@ -29,31 +29,8 @@ public class ProductService {
 		return productInfoList;
 	}
 
-	public JSONObject getProductInfoByProductIdx(int productIdx) {
-		
-		ProductInfoDao dao = new ProductInfoDao();
-		
-		ProductInfo productInfo = dao.selectByProductIdx(productIdx);
-		
-		if(productInfo != null) {
-			JSONObject json = new JSONObject();
-			
-			json.put("productIdx",productInfo.getProductIdx());
-			json.put("name",productInfo.getName());
-			json.put("category",productInfo.getCategory());
-			json.put("stock",productInfo.getStock());
-			json.put("price",productInfo.getPrice());
-			json.put("img",productInfo.getImg());
-			json.put("insertDate",productInfo.getInsertDate());
-			
-			return json;
-		}else {
-			return null;
-		}
-		
-	}
 	
-	public ProductInfo study_getProductInfoByProductIdx(int productIdx) {
+	public ProductInfo getProductInfoByProductIdx(int productIdx) {
 		
 		ProductInfoDao dao = new ProductInfoDao();
 		
