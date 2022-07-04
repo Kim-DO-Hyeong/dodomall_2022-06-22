@@ -41,6 +41,7 @@
 		                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
 		                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" id="buy_btn">구매 하기</button>
 		                    </div>
+		                    <input type="text" id="productIdx" value="${productInfo.productIdx }" style="display:none"/>
 		                  </div>
                 </div>
               </div>
@@ -50,7 +51,16 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="../js/scripts.js"></script>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        
+        <script>
+        	$("#buy_btn").on("click",function(){
+        		let productIdx = $("#productIdx").val();
+        		location.href="/dodomall/buy/form.jsp?productIdx="+productIdx;
+        	});
+        </script>
+        
         
     </body>
 </html>

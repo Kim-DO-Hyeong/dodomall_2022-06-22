@@ -78,7 +78,7 @@
                         <div class="row g-3">
                           <div class="col-12">
                             <label for="firstName" class="form-label">이름</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="${loginMemberInfo.name }" required="">
                             <div class="invalid-feedback">
                               Valid last name is required.
                             </div>
@@ -86,7 +86,7 @@
               
                           <div class="col-12">
                             <label for="firstName" class="form-label">연락처</label>
-                            <input type="tel" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <input type="tel" class="form-control" id="firstName" placeholder="" value="${loginMemberInfo.tel }" required="">
                             <div class="invalid-feedback">
                               Valid last name is required.
                             </div>
@@ -94,7 +94,7 @@
 
                           <div class="col-12">
                             <label for="firstName" class="form-label">주소</label>
-                            <input type="email" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <input type="email" class="form-control" id="firstName" placeholder="" value="${loginMemberInfo.addr }" required="">
                             <div class="invalid-feedback">
                               Valid last name is required.
                             </div>
@@ -102,7 +102,7 @@
               
                           <div class="col-12">
                             <label for="firstName" class="form-label">이메일</label>
-                            <input type="email" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <input type="email" class="form-control" id="firstName" placeholder="" value="${loginMemberInfo.email }" required="">
                             <div class="invalid-feedback">
                               Valid last name is required.
                             </div>
@@ -157,18 +157,18 @@
               
                         <div class="my-3">
                           <div class="form-check">
-                            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+                            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="" value="무통장입금">
                             <label class="form-check-label" for="credit">무통장입금</label>
                           </div>
                           <div class="form-check">
-                            <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+                            <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="" value="현금">
                             <label class="form-check-label" for="debit">현금</label>
                           </div>
                         </div>
               
                         <hr class="my-4">
-              
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">구매</button>
+              			<input type="text" id="productIdx" value="${param.productIdx }" style="display:none"/>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" id="buy_btn">구매</button>
                       </form>
                     </div>
                   </div>
@@ -180,5 +180,27 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        
+        <script>
+        	$("#buy_btn").on("click",function(e){
+        		e.preventDefault();
+        		
+        		let productIdx = $("#productIdx").val();
+        		let paymentMethod = $("input[type=radio]:checked").val();
+        		
+        		$.ajax({
+        			url:"/dodomall/product/buy",
+        			type:"POST",
+        			data:"productIdx="+productIdx+"&paymentMethod="+paymentMethod,
+        			success:function(){
+        				alert("구매가 완료되었습니다");
+        			},
+        			error:function(){
+        				alert("에러 발생");
+        			}
+        		});
+        	});
+        </script>
     </body>
 </html>
