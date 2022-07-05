@@ -49,14 +49,15 @@ public class MngProductDao {
 		try {
 			conn = DatabaseManager.getConnection();
 					
-			String sql = "UPDATE product_info SET name = ?, category = ?, stock = ?, price = ? WHERE productIdx = ?";
+			String sql = "UPDATE product_info SET name = ?, category = ?, stock = ?, price = ?, img = ? WHERE productIdx = ?";
 			
 			pstmt = DatabaseManager.getPstmt(conn, sql);
 			pstmt.setString(1, productInfo.getName());
 			pstmt.setString(2, productInfo.getCategory());
 			pstmt.setInt(3, productInfo.getStock());
 			pstmt.setInt(4, productInfo.getPrice());
-			pstmt.setInt(5, productInfo.getProductIdx());
+			pstmt.setString(5, productInfo.getImg());
+			pstmt.setInt(6, productInfo.getProductIdx());
 			
 			pstmt.executeUpdate();
 			

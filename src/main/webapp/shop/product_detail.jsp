@@ -84,8 +84,14 @@
 	    		location.href="/dodomall/view/product/update?productIdx="+productIdx;
 	    	});
         	$("#buy_btn").on("click",function(){
+        		let stock = ${productInfo.stock};
         		let productIdx = $("#productIdx").val();
-        		location.href="/dodomall/buy/form.jsp?productIdx="+productIdx;
+        		if(stock==0){
+        			alert("재고가 없는 상품입니다");
+        		}else{
+        			location.href="/dodomall/buy/form.jsp?page=buy&productIdx="+productIdx;        			
+        		}
+        		
         	});
         </script>
         

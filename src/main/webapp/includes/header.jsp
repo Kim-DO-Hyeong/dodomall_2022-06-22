@@ -32,7 +32,7 @@
   	</c:when>
   	
   	<c:when test="${param.page eq 'buy'}">
-  	 	<c:set var="header_title" value="구메"/>
+  	 	<c:set var="header_title" value="구매"/>
   	</c:when>
   	
   	<c:when test="${param.page eq 'manager_product_form'}">

@@ -29,15 +29,14 @@
                   <div class="col-lg">
                   
                   	<c:set var="action" value="http://localhost/dodomall//mng/product/add"/>
-                  	<c:set var="enctype" value="enctype='multipart/form-data'"/>
+                  	
                   	<c:if test="${param.page eq 'product_update'}">
              			<c:set var="action" value="http://localhost/dodomall//mng/product/update"/>
-             			<c:set var="enctype" value="enctype='application/x-www-form-urlencoded'"/>
              		</c:if>
                     
-                    <form action="${action}" method="POST" ${enctype }>
+                    <form action="${action}" method="POST" enctype="multipart/form-data" >
                     	<c:if test="${param.page eq 'product_update'}">
-                    		<input type="hidden" value="${productInfo.productIdx }" name="productIdx">
+                    		<input type="hidden" value="${productInfo.productIdx }" name="productIdx" id="productIdx">
                     	</c:if>
                         <div class="input-group input-group-lg" id="product_name_wrapper">
                             <span class="input-group-text" id="inputGroup-sizing-lg">상품명</span>
@@ -85,11 +84,11 @@
                             	<c:if test="${empty productInfo.img}">
                             		<c:set var="filePathStyle" value="style='display:none'"></c:set>
                             	</c:if>
-                            
-                            <input type="file" class="form-control" id="inputGroupFile01" name="img" ${style}>
+                          
+                            <input type="file" class="form-control" id="inputGroupFile01" name="img" ${style} >
                             <span class="product_file_path" ${filePathStyle } >${imgFileName }</span>
                         	<c:if test="${not empty productInfo.img }">
-                        		<button type="button" class="btn btn-danger btn-lg px-4 me-md-2">이미지 삭제</button>
+                        		<button type="button" class="btn btn-danger btn-lg px-4 me-md-2" id="imgDelete_btn">이미지 삭제</button>
                         	</c:if>
                         </div>
                     
@@ -115,6 +114,21 @@
         <script src="/dodomall/js/jquery-3.6.0.min.js"></script>
         <script>
         	// 이미지 삭제 버튼 구현 
+			$("#imgDelete_btn").on("click",function(){
+				let productIdx = $("#productIdx").val();
+				$.ajax({
+					url:"/dodomall/mng/product/img/delete",
+					type:"POST",
+					data:"productIdx="+productIdx,
+					success:function(){
+						alert("이미지 삭제에 성공했습니다.");
+						location.reload();
+					},
+					error:function(){
+						alert("이미지 삭제에 실패했습니다.");
+					}	
+				});
+			});
         </script>
     </body>
 </html>
